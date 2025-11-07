@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajay Kumar - Social Links</title>
+    <meta name="description" content="Connect with Ajay Kumar on Instagram and Snapchat - @ajay.rx7" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(-45deg, hsl(220, 25%, 8%), hsl(200, 80%, 15%), hsl(180, 90%, 20%), hsl(180, 100%, 50%));
+            background-size: 300% 300%;
+            animation: gradient-shift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animations */
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.8),
+                            0 0 40px rgba(0, 255, 255, 0.8);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(0, 255, 255, 1),
+                            0 0 60px rgba(0, 255, 255, 1),
+                            0 0 80px rgba(200, 100, 255, 0.8);
+            }
+        }
+
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scale-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Background Effects */
+        .mesh-gradient {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .mesh-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            mix-blend-mode: multiply;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .mesh-orb:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 384px;
+            height: 384px;
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .mesh-orb:nth-child(2) {
+            top: 0;
+            right: 0;
+            width: 384px;
+            height: 384px;
+            background: rgba(200, 100, 255, 0.3);
+            animation-delay: 2s;
+        }
+
+        .mesh-orb:nth-child(3) {
+            bottom: 0;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(100, 200, 255, 0.3);
+            animation-delay: 4s;
+        }
+
+        .mesh-orb:nth-child(4) {
+            bottom: 0;
+            right: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(0, 255, 255, 0.2);
+            animation-delay: 6s;
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.2);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
+            pointer-events: none;
+        }
+
+        .vignette {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, transparent, rgba(13, 17, 23, 0.6));
+            pointer-events: none;
+        }
+
+        /* Main Content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+        }
+
+        /* Name Section */
+        .name-section {
+            margin-bottom: 4rem;
+            text-align: center;
+            animation: fade-in-up 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .name {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: rgb(180, 255, 255);
+            animation: glow 3s ease-in-out infinite, float 6s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        .name span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            cursor: default;
+        }
+
+        .name span:hover {
+            transform: scale(1.1);
+        }
+
+        .underline {
+            height: 4px;
+            width: 128px;
+            margin: 0 auto;
+            background: linear-gradient(to right, transparent, rgb(0, 255, 255), transparent);
+            border-radius: 9999px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Social Cards */
+        .social-cards {
+            display: grid;
+            gap: 2rem;
+            width: 100%;
+            max-width: 42rem;
+            animation: scale-in 0.6s ease-out forwards;
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .card-wrapper {
+            position: relative;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(180, 255, 255, 0.3);
+            border-radius: 1rem;
+            background: rgba(28, 35, 45, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent, rgba(0, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            border-color: rgb(0, 255, 255);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card.snapchat:hover {
+            border-color: rgb(200, 100, 255);
+            box-shadow: 0 0 30px rgba(200, 100, 255, 0.3);
+        }
+
+        .card-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-wrapper {
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, rgb(0, 255, 255), rgb(100, 200, 255));
+            padding: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.5s ease;
+        }
+
+        .snapchat .icon-wrapper {
+            background: linear-gradient(to bottom right, rgb(200, 100, 255), rgb(0, 255, 255));
+        }
+
+        .card:hover .icon-wrapper {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            color: rgb(13, 17, 23);
+        }
+
+        .card-text {
+            flex: 1;
+        }
+
+        .card-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgb(150, 180, 200);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-username {
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgb(180, 255, 255);
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-username {
+            color: rgb(0, 255, 255);
+        }
+
+        .snapchat:hover .card-username {
+            color: rgb(200, 100, 255);
+        }
+
+        .arrow {
+            font-size: 2.5rem;
+            color: rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .arrow {
+            color: rgb(0, 255, 255);
+            transform: translateX(0.5rem);
+        }
+
+        .snapchat:hover .arrow {
+            color: rgb(200, 100, 255);
+        }
+
+        /* Snap Score Badge */
+        .snap-badge {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            z-index: 20;
+            animation: scale-in 0.6s ease-out forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        .snap-badge-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgb(200, 100, 255), rgb(0, 255, 255));
+            border-radius: 9999px;
+            filter: blur(12px);
+            opacity: 0.6;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .snap-badge-content {
+            position: relative;
+            background: linear-gradient(to right, rgb(200, 100, 255), rgb(0, 255, 255), rgb(100, 200, 255));
+            color: rgb(180, 255, 255);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(180, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            text-align: center;
+        }
+
+        .snap-badge-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: 0.125rem;
+        }
+
+        .snap-badge-score {
+            font-size: 1.25rem;
+            font-weight: 900;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .decoration:nth-child(1) {
+            top: 25%;
+            left: 2.5rem;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .decoration:nth-child(2) {
+            bottom: 25%;
+            right: 2.5rem;
+            width: 128px;
+            height: 128px;
+            background: rgba(200, 100, 255, 0.3);
+            animation-delay: 1s;
+        }
+
+        .decoration:nth-child(3) {
+            top: 50%;
+            left: 25%;
+            width: 96px;
+            height: 96px;
+            background: rgba(100, 200, 255, 0.2);
+            animation-delay: 2s;
+        }
+
+        .decoration:nth-child(4) {
+            top: 33%;
+            right: 33%;
+            width: 112px;
+            height: 112px;
+            background: rgba(0, 255, 255, 0.2);
+            animation-delay: 3s;
+        }
+
+        .ring {
+            position: absolute;
+            border: 2px solid rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .ring:nth-child(1) {
+            top: 2.5rem;
+            right: 5rem;
+            width: 160px;
+            height: 160px;
+            animation: spin 20s linear infinite;
+        }
+
+        .ring:nth-child(2) {
+            bottom: 5rem;
+            left: 5rem;
+            width: 240px;
+            height: 240px;
+            border-color: rgba(200, 100, 255, 0.1);
+            animation: spin 30s linear infinite reverse;
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 3.5rem;
+            }
+
+            .card-username {
+                font-size: 1.5rem;
+            }
+
+            .snap-badge {
+                right: -0.5rem;
+            }
+
+            .decoration, .ring {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="mesh-gradient">
+        <div class="mesh-orb"></div>
+        <div class="mesh-orb"></div>
+        <div class="mesh-orb"></div>
+        <div class="mesh-orb"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+    <div class="grid-overlay"></div>
+    <div class="vignette"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Name Section -->
+        <div class="name-section">
+            <h1 class="name">
+                <span>A</span><span>j</span><span>a</span><span>y</span>
+                <span style="margin: 0 1rem;"></span>
+                <span>K</span><span>u</span><span>m</span><span>a</span><span>r</span>
+            </h1>
+            <div class="underline"></div>
+        </div>
+
+        <!-- Social Cards -->
+        <div class="social-cards">
+            <!-- Instagram Card -->
+            <a href="https://instagram.com/ajay.rx7" target="_blank" rel="noopener noreferrer" class="card-wrapper">
+                <div class="card instagram">
+                    <div class="card-content">
+                        <div class="icon-wrapper">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <p class="card-label">Instagram</p>
+                            <p class="card-username">@ajay.rx7</p>
+                        </div>
+                        <div class="arrow">→</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Snapchat Card -->
+            <div class="card-wrapper">
+                <a href="https://snapchat.com/add/ajay.rx7" target="_blank" rel="noopener noreferrer">
+                    <div class="card snapchat">
+                        <div class="card-content">
+                            <div class="icon-wrapper">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 10h.01"></path>
+                                    <path d="M15 10h.01"></path>
+                                    <path d="M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"></path>
+                                </svg>
+                            </div>
+                            <div class="card-text">
+                                <p class="card-label">Snapchat</p>
+                                <p class="card-username">ajay.rx7</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Snap Score Badge -->
+                <div class="snap-badge">
+                    <div class="snap-badge-glow"></div>
+                    <div class="snap-badge-content">
+                        <p class="snap-badge-label">Snap Score</p>
+                        <p class="snap-badge-score">15M</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+    </div>
+
+    <script>
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = `${Math.random() * 6 + 2}px`;
+            particle.style.height = `${Math.random() * 6 + 2}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 8}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 8}s`;
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
